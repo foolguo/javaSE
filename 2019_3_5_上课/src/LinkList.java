@@ -37,10 +37,32 @@ public class LinkList implements Sequence{
             tail.next=newNode;
         }
         tail=newNode;
+        size++;
     }
 
-    //@Override
-    //public void add(Object data, int index) { }
+    /**
+     * 在指定位置插入元素
+     * @param data
+     * @param index
+     */
+    @Override
+    public void add(Object data, int index) {
+        if(index<0||index>size){
+            throw  new IndexOutOfBoundsException("下标越界");
+        }
+        Node curr=node(index);
+        Node prev=curr.prev;
+        if (curr==head){
+            Node node=new Node(null,data,head);
+            head=node;
+            size++;
+        }else{
+            Node node=new Node(prev,data,curr);
+            prev.next=node;
+            curr.prev=node;
+            size++;
+        }
+    }
 
     public Object get(int index){
         rangcheck(index);
@@ -60,31 +82,72 @@ public class LinkList implements Sequence{
         return temp;
     }
     private void rangcheck(int index){
-        if(index<0||index>=0){
+        if(index<0||index>=size){
             throw new IndexOutOfBoundsException("下标越界");
         }
     }
 
+    /**
+     *  * 删除元素
+     *      * 思路
+     *      * 1.判断是否是头结点，
+     *      * 2.判断是否是尾结点
+     * @param index
+     * @return
+     */
     @Override
-    public Object remote(Object data) {
-        return null;
-    }
-
-    @Override
-    public Object remote(Object data, int index) {
+    public Object remote(int index) {
         rangcheck(index);
         Node curr=node(index);
-        Node prex=curr.prev;
+        Object temp=curr.data;
+        Node prev=curr.prev;
         Node next=curr.next;
-        if(head==null){
-            return head;
+        if(curr==head){
+            head=head.next;
+        }else{
+            prev.next=curr.next;
+            curr.next=null;
         }
-        return null;
+        if(curr==tail){
+            tail=tail.prev;
+        }else{
+            next.prev=curr.prev;
+            curr.prev=null;
+        }
+        size--;
+        return temp;
     }
 
+
+
+
+    /**
+     * 删除指定元素
+     * @param data
+     * @return
+     */
     @Override
-    public Object remoteDate(Object data) {
-        return null;
+    public void remoteDate(Object data) {
+        Node temp=head;
+        while(temp!=null){
+           Node next=temp.next;
+           Node prev=temp.prev;
+            if(temp.data==data){
+                if(temp==head){
+                    head=head.next;
+                }else{
+                    prev.next=temp.next;
+                    temp.next=null;
+                 }
+                if(temp==tail){
+                    tail=tail.prev;
+                }else {
+                    next.prev=temp.prev;
+                    temp.prev=null;
+                }
+            }
+            temp=next;
+        }
     }
 
     @Override

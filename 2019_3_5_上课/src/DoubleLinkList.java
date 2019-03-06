@@ -13,6 +13,12 @@ public class DoubleLinkList {
         list.add(1);
         list.add(2);
         list.add(3);
+        list.add(4);
+        list.add("abc");
+        list.add(4);
+        list.add("hahaha",0);
+        list.add("pig",2);
+        /*list.add("pork",8);*/
         list.display();
     }
     /*public static Node remove(Node head,Object data){

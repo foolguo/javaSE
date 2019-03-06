@@ -5,13 +5,11 @@
  */
 public interface Sequence {
     void add(Object data);
-   // void add(Object data,int index);
-    Object remote(Object data);
-    Object remote(Object data,int index);
-    //删除指定元素
+    void add(Object data,int index);
+    Object remote(int index);
     Object get(int index);
     void set(int index,Object newNode);
-    Object remoteDate(Object data);
+    void remoteDate(Object data);
     void clear();
     int getSize();
 
