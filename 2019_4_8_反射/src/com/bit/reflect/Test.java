@@ -12,7 +12,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-/**
+/*
+*
  * 1.获取类的Class的对象，三种方法：
  * 1.Object类里面的 getClass() 方法  对象名.getClass();
  * 2.类名.Class
@@ -45,17 +46,14 @@ import java.lang.reflect.Method;
  *  4.在本类中取得指定名称属性:getDeclaredField(String name);
  *
  *  set(属性名，传入的值)
- *  get(属性名)
- */
-/*
+ *  get(属性名)*/
 public class Test {
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
       Person per = new Person();
         Class cls1 = per.getClass();
         Class cls2 = Person.class;
         Class cls3 = Class.forName("com.bit.reflect.Student");
-*/
-        /*Constructor[] constructors1 =cls2.getConstructors();
+/*        Constructor[] constructors1 =cls2.getConstructors();
         for (Constructor i:constructors1){
             System.out.println(i);
         }
@@ -67,12 +65,12 @@ public class Test {
         System.out.println("-------------");
         Constructor[] constructors3=cls1.getDeclaredConstructors();
         for(Constructor z:constructors3){
-            System.out.println(z);}*/
+            System.out.println(z);}
         //System.out.println(cls1.newInstance());
-        /*System.out.println(cls1.getPackage().getName());
+        System.out.println(cls1.getPackage().getName());
         System.out.println(cls3.getSuperclass().getName());
-        System.out.println(cls2.getInterfaces());*/
-       /* Method[] method1=cls1.getDeclaredMethods();
+        System.out.println(cls2.getInterfaces());
+        Method[] method1=cls1.getDeclaredMethods();
         for (Method i:method1){
             System.out.println(i);
         }
@@ -90,8 +88,8 @@ public class Test {
         Method[] method4=cls3.getMethods();
         for (Method l:method4){
             System.out.println(l);
-        }*/
-      /* Constructor constructor=cls1.getConstructor(String.class,Integer.class);
+        }
+       Constructor constructor=cls1.getConstructor(String.class,Integer.class);
         Object obj=constructor.newInstance("haha",12);
         Method method=cls1.getMethod("getName");
         System.out.println(method.invoke(obj));
@@ -109,37 +107,23 @@ public class Test {
         Method method2=cls2.getMethod("getAge");
         System.out.println(method2.invoke(object));
         System.out.println(field.getType().getName());
-        System.out.println(field1.getType().getSimpleName());*/
-//            Method[] methods = cls3.getMethods();
-//            for (Method i:methods){
-//                System.out.println(i);
-//            }
-//            System.out.println("------------------------");
-//            Method[] methods1=cls3.getDeclaredMethods();
-//            for (Method j:methods1){
-//                System.out.println(j);
-//            }
+        System.out.println(field1.getType().getSimpleName());
 
 
 
-       /* Field[] fields=cls3.getFields();
+
+        Field[] fields=cls3.getFields();
         for (Field i:fields){
             System.out.println(i);
         }
-        System.out.println("------------");
-        Field[] fields1=cls3.getDeclaredFields();
-        for (Field j:fields1){
-            System.out.println(j);
-        }*/
-/*
-        Field[] fields1=cls3.getDeclaredFields();
-        for (Field j:fields1){
-            System.out.println(j);
-        }
-        Field[] field2=cls3.getFields();
-        for (Field i:field2){
-            System.out.println(i);
-        }
+        System.out.println("------------");*/
+        Object object=cls1.getConstructor(String.class,Integer.class).
+                newInstance("hah",22);
+
+        Field fields1=cls1.getDeclaredField("name");
+        fields1.setAccessible(true);
+        System.out.println(fields1.get(object));
+
     }
 }
 
@@ -152,7 +136,7 @@ class Person {
     public Person() {
     }
 
-    private Person(String name) {
+    public Person(String name) {
         this.name = name;
     }
 
@@ -202,10 +186,9 @@ class Student extends Person{
         this.school = school;
     }
 }
-*/
 
 
-interface Fruit{
+/*interface Fruit{
     void buy();
 }
 class Apple implements Fruit{
@@ -227,6 +210,7 @@ class Factory{
         Fruit fruit=null;
         Class cls=Class.forName(classNmae);
         fruit= (Fruit) cls.newInstance();
+        cls.getConstructors();
         return fruit;
     }
 }
@@ -234,5 +218,6 @@ public class Test{
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         Fruit fruit=Factory.getInstance("com.bit.reflect.Apple");
         fruit.buy();
+
     }
-}
+}*/
